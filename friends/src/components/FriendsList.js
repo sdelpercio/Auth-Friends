@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import { Link } from 'react-router-dom';
+
+import {
+	StyledContainer,
+	StyledHeader,
+	StyledLink,
+	StyledCardContainer,
+	StyledCard,
+	StyledButton
+} from '../styled';
 
 const FriendsList = () => {
 	const [friends, setFriends] = useState([]);
@@ -31,22 +39,30 @@ const FriendsList = () => {
 	return (
 		<>
 			{loading ? (
-				<h3>l o a d i n g . . .</h3>
+				<StyledContainer>
+					<img
+						src='https://fontmeme.com/permalink/200225/ae77d3250ba22a13bad693b7de9ef6d3.png'
+						alt='gregor-miller-s-friends-font-font'
+						border='0'
+					/>
+				</StyledContainer>
 			) : (
-				<div>
-					<h1>Friends List</h1>
-					<Link to='/friends-list/add'>Add Friend</Link>
-					<div>
+				<StyledContainer>
+					<StyledHeader>Friends List</StyledHeader>
+					<StyledLink to='/friends-list/add'>Add Friend</StyledLink>
+					<StyledCardContainer>
 						{friends.map(friend => (
-							<div key={friend.id}>
+							<StyledCard key={friend.id}>
 								<h3>Name: {friend.name}</h3>
 								<p>Age: {friend.age}</p>
 								<p>Email: {friend.email}</p>
-								<button onClick={() => deleteFriend(friend.id)}>Delete</button>
-							</div>
+								<StyledButton onClick={() => deleteFriend(friend.id)}>
+									Delete
+								</StyledButton>
+							</StyledCard>
 						))}
-					</div>
-				</div>
+					</StyledCardContainer>
+				</StyledContainer>
 			)}
 		</>
 	);
