@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
-const Login = () => {
-	const [credentials, setCredentials] = useState({
-		username: '',
-		password: ''
+const AddFriend = () => {
+	const [newFriend, setNewFriend] = useState({
+		name: '',
+		age: '',
+		email: ''
 	});
 	let history = useHistory();
 
 	const handleChange = e => {
-		setCredentials({
-			...credentials,
+		setNewFriend({
+			...newFriend,
 			[e.target.name]: e.target.value
 		});
 	};
@@ -19,38 +20,46 @@ const Login = () => {
 	const handleSubmit = e => {
 		e.preventDefault();
 		axiosWithAuth()
-			.post('/api/login', credentials)
+			.post('/api/friends', newFriend)
 			.then(res => {
-				window.localStorage.setItem('token', res.data.payload);
 				history.push('/friends-list');
 			})
 			.catch(err => {
-				console.log(err);
+				console.log('add friend error', err);
 			});
 	};
 
 	return (
 		<>
+			<h1>Add a Friend</h1>
 			<form onSubmit={handleSubmit}>
 				<input
 					type='text'
-					name='username'
-					placeholder='username'
-					value={credentials.username}
+					name='name'
+					placeholder='name'
+					value={newFriend.name}
 					onChange={handleChange}
 					required
 				/>
 				<input
-					type='password'
-					name='password'
-					placeholder='password'
-					value={credentials.password}
+					type='number'
+					name='age'
+					placeholder='age'
+					value={newFriend.age}
 					onChange={handleChange}
 					required
 				/>
-				<button>Login</button>
+				<input
+					type='email'
+					name='email'
+					placeholder='email'
+					value={newFriend.email}
+					onChange={handleChange}
+					required
+				/>
+				<button>Add</button>
 			</form>
 		</>
 	);
 };
-export default Login;
+export default AddFriend;
