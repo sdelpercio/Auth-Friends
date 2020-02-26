@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
+import { StyledForm, StyledHeader, StyledInput, StyledLogin } from '../styled';
+
 const AddFriend = () => {
 	const [newFriend, setNewFriend] = useState({
 		name: '',
@@ -31,9 +33,9 @@ const AddFriend = () => {
 
 	return (
 		<>
-			<h1>Add a Friend</h1>
-			<form onSubmit={handleSubmit}>
-				<input
+			<StyledForm onSubmit={handleSubmit}>
+				<StyledHeader>Add a Friend</StyledHeader>
+				<StyledInput
 					type='text'
 					name='name'
 					placeholder='name'
@@ -41,7 +43,7 @@ const AddFriend = () => {
 					onChange={handleChange}
 					required
 				/>
-				<input
+				<StyledInput
 					type='number'
 					name='age'
 					placeholder='age'
@@ -49,7 +51,7 @@ const AddFriend = () => {
 					onChange={handleChange}
 					required
 				/>
-				<input
+				<StyledInput
 					type='email'
 					name='email'
 					placeholder='email'
@@ -57,8 +59,8 @@ const AddFriend = () => {
 					onChange={handleChange}
 					required
 				/>
-				<button>Add</button>
-			</form>
+				<StyledLogin>Add</StyledLogin>
+			</StyledForm>
 		</>
 	);
 };

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
+import { StyledForm, StyledHeader, StyledInput, StyledLogin } from '../styled';
+
 const Login = () => {
 	const [credentials, setCredentials] = useState({
 		username: '',
@@ -31,8 +33,9 @@ const Login = () => {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
-				<input
+			<StyledForm onSubmit={handleSubmit}>
+				<StyledHeader>Login</StyledHeader>
+				<StyledInput
 					type='text'
 					name='username'
 					placeholder='username'
@@ -40,7 +43,7 @@ const Login = () => {
 					onChange={handleChange}
 					required
 				/>
-				<input
+				<StyledInput
 					type='password'
 					name='password'
 					placeholder='password'
@@ -48,8 +51,8 @@ const Login = () => {
 					onChange={handleChange}
 					required
 				/>
-				<button>Login</button>
-			</form>
+				<StyledLogin>Login</StyledLogin>
+			</StyledForm>
 		</>
 	);
 };
